@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detrás del Frame - Portal de Cine y Series</title>
+    <style>
+        :root {
+            --primary-red: #8B0000;
+            --secondary-red: #DC143C;
+            --accent-red: #FF6B6B;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #000000;
+            --card-bg: #1a1a1a;
+            --text-white: #ffffff;
+            --text-gray: #cccccc;
+            --text-dark-gray: #888888;
+            --border-gray: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a0a0a 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(90deg, var(--darker-bg) 0%, var(--primary-red) 50%, var(--darker-bg) 100%);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 0;
+            position: static;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(139, 0, 0, 0.3);
+            border-bottom: 2px solid var(--primary-red);
+        }
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .logo-icon::before {
+            content: '🎬';
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+        }
+
+        .logo-text {
+            color: var(--text-white);
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .nav-menu a:hover {
+            background: var(--primary-red);
+            border-color: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.4);
+        }
+
+        .main-content {
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(139, 0, 0, 0.3)), 
+                        url('https://images.unsplash.com/photo-1489599387838-1726b119c37a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(45deg, var(--text-white), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            color: var(--text-white);
+            padding: 1.2rem 2.5rem;
+            border: 2px solid var(--secondary-red);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 1.1s both;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.5);
+            border-color: var(--accent-red);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--text-white);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red), var(--secondary-red));
+            border-radius: 2px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .search-input {
+            padding: 1rem 2rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 30px;
+            background: var(--card-bg);
+            color: var(--text-white);
+            font-size: 1rem;
+            width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary-red);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-dark-gray);
+        }
+
+        .search-button {
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            color: var(--text-white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            color: var(--text-gray);
+            border: 2px solid var(--border-gray);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            color: var(--text-white);
+            border-color: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--border-gray);
+        }
+
+        .article-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(139, 0, 0, 0.3);
+            border-color: var(--primary-red);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, var(--card-bg));
+        }
+
+        .article-content {
+            padding: 2rem;
+        }
+
+        .article-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: var(--text-white);
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-red);
+            margin-bottom: 1rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .article-excerpt {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-gray);
+            font-size: 0.95rem;
+            color: var(--text-dark-gray);
+        }
+
+        .read-more {
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            color: var(--text-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--secondary-red);
+        }
+
+        .read-more:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--secondary-red), var(--accent-red));
+        }
+
+        .featured-section {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--primary-red) 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--secondary-red);
+        }
+
+        .featured-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red), var(--primary-red));
+            z-index: -1;
+            border-radius: 30px;
+        }
+
+        .featured-content {
+            text-align: center;
+            color: var(--text-white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .featured-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .load-more-btn {
+            background: var(--card-bg);
+            color: var(--text-white);
+            border: 2px solid var(--primary-red);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.4);
+        }
+
+        .footer {
+            background: linear-gradient(90deg, var(--darker-bg) 0%, var(--primary-red) 50%, var(--darker-bg) 100%);
+            color: var(--text-white);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 3px solid var(--secondary-red);
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer p:last-child {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .search-input {
+                width: 280px;
+            }
+
+            .category-filter {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animaciones adicionales */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-card {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .article-card:nth-child(2n) {
+            animation-delay: 0.1s;
+        }
+
+        .article-card:nth-child(3n) {
+            animation-delay: 0.2s;
+        }
+
+        .article-card:nth-child(4n) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo">
+                <img src="img/ChatGPT Image 8 ago 2025, 12_18_02 p.m..png" alt="imagen-logo">
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#">Inicio</a>
+                <a href="#peliculas">Películas</a>
+                <a href="#series">Series</a>
+                <a href="#criticas">Críticas</a>
+                <a href="#noticias">Noticias</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Trabajo de edi</h1>
+                <p>Bienvenido a Detrás del Frame, tu portal de cine y series</p>
+                <a href="#articulos" class="cta-button">Explorar Contenido</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="articulos">
+                <h2 class="section-title">Últimos Artículos</h2>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar artículos...">
+                    <button class="search-button">Buscar</button>
+                </div>
+
+                <div class="category-filter">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Películas</button>
+                    <button class="filter-btn">Series</button>
+                    <button class="filter-btn">Análisis</button>
+                    <button class="filter-btn">Noticias</button>
+                </div>
+
+                <div class="articles-grid">
+                    <article class="article-card" data-category="peliculas">
+                        <div class="article-image" style="background-image: url('img/poridentidad.jpeg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Dune: Parte Dos - La Épica Continúa</h3>
+                            <p class="article-subtitle">El regreso triunfal de Denis Villeneuve</p>
+                            <p class="article-excerpt">Denis Villeneuve logra superar su primera entrega con una secuela que profundiza en la mitología de Herbert mientras mantiene un espectáculo visual sin precedentes. La construcción del mundo de Arrakis alcanza nuevas alturas...</p>
+                            <div class="article-meta">
+                                <span>📅 5 de Agosto, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="series">
+                        <div class="article-image" style="background-image: url('img/houseofthedragon.jpeg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">House of the Dragon: Temporada 3</h3>
+                            <p class="article-subtitle">El legado Targaryen se intensifica</p>
+                            <p class="article-excerpt">La tercera temporada promete elevar las apuestas con una guerra civil que dividirá Westeros. Los dragones vuelan más alto que nunca mientras las alianzas se forjan y se rompen en esta épica continuación...</p>
+                            <div class="article-meta">
+                                <span>📅 3 de Agosto, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="analisis">
+                        <div class="article-image" style="background-image: url('img/Barbie-Oppenheimer.webp');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Oppenheimer vs Barbie: Un Año Después</h3>
+                            <p class="article-subtitle">El fenómeno cultural que marcó 2024</p>
+                            <p class="article-excerpt">Un análisis retrospectivo del "Barbenheimer" y su impacto en la industria cinematográfica. ¿Cómo cambió la percepción del público sobre el cine de autor y el entretenimiento comercial?</p>
+                            <div class="article-meta">
+                                <span>📅 1 de Agosto, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="series">
+                        <div class="article-image" style="background-image: url('img/1766a1cc94bcd6c04a9cd449e5c2f2f0bdb4fbf9525832ea2c9c170c48ad433e.jpg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">The Expanse: El Regreso Esperado</h3>
+                            <p class="article-subtitle">La ciencia ficción vuelve a sus raíces</p>
+                            <p class="article-excerpt">Después de años de especulación, Amazon confirma el desarrollo de una nueva película de The Expanse. Exploramos qué podemos esperar del regreso de la Rocinante y su tripulación...</p>
+                            <div class="article-meta">
+                                <span>📅 30 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="peliculas">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Batman: The Brave and the Bold</h3>
+                            <p class="article-subtitle">Una nueva visión del Caballero de la Noche</p>
+                            <p class="article-excerpt">Matt Reeves revela nuevos detalles sobre su universo Batman expandido. Esta nueva película explorará la relación padre-hijo entre Bruce Wayne y Damian Wayne en una aventura épica...</p>
+                            <div class="article-meta">
+                                <span>📅 28 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="series">
+                        <div class="article-image" style="background-image: url('/img/stranger.jpeg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Stranger Things: El Final de una Era</h3>
+                            <p class="article-subtitle">Reflexiones sobre la quinta y última temporada</p>
+                            <p class="article-excerpt">Los hermanos Duffer se preparan para cerrar la historia de Hawkins. Un repaso por el impacto cultural de la serie y las expectativas para su conclusión épica que promete respuestas a todos los misterios...</p>
+                            <div class="article-meta">
+                                <span>📅 25 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="series">
+                        <div class="article-image" style="background-image: url('img/thbear.jpeg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">The Bear: Anatomía del Éxito</h3>
+                            <p class="article-subtitle">Cómo una serie sobre cocina conquistó el mundo</p>
+                            <p class="article-excerpt">Desglosamos los elementos que han convertido a The Bear en un fenómeno crítico y popular, desde su autenticidad hasta su manejo magistral del trauma, la comedia y la tensión dramática...</p>
+                            <div class="article-meta">
+                                <span>📅 22 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="peliculas">
+                        <div class="article-image" style="background-image: url('img/avatar.jpg');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Avatar 3: Nuevos Horizontes en Pandora</h3>
+                            <p class="article-subtitle">James Cameron y la evolución visual</p>
+                            <p class="article-excerpt">Las últimas noticias sobre la tercera entrega de Avatar revelan nuevas tribus y biomas. Analizamos cómo Cameron sigue empujando los límites de la tecnología cinematográfica hacia territorios inexplorados...</p>
+                            <div class="article-meta">
+                                <span>📅 20 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card" data-category="peliculas">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="article-content">
+                            <h3 class="article-title">Spider-Verse 3: El Multiverso se Expande</h3>
+                            <p class="article-subtitle">Animación que redefine el género</p>
+                            <p class="article-excerpt">Sony Pictures Animation confirma que la tercera película de Spider-Verse llevará la animación a nuevos niveles. Exploramos las técnicas innovadoras y los nuevos Spider-Heroes que están desarrollando...</p>
+                            <div class="article-meta">
+                                <span>📅 18 de Julio, 2025</span>
+                                <a href="#" class="read-more">Leer más →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="load-more-container">
+                    <button class="load-more-btn">Cargar Más Artículos</button>
+                </div>
+            </section>
+
+            <section class="featured-section">
+                <div class="featured-content">
+                    <h2>Análisis Especial: La Evolución del Streaming</h2>
+                    <p>Un profundo análisis sobre cómo las plataformas de streaming han transformado no solo la manera en que consumimos contenido, sino también cómo se produce, distribuye y se piensa el entretenimiento en la era digital. Desde Netflix hasta Disney+, exploramos el futuro del entretenimiento.</p>
+                    <a href="#" class="cta-button">Leer Análisis Completo</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Detrás del Frame. Explorando el arte del cine y las series.</p>
+        <p>Síguenos en nuestras redes sociales para más contenido exclusivo sobre el mundo audiovisual.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const searchInput = document.querySelector('.search-input');
+            const searchButton = document.querySelector('.search-button');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const articles = document.querySelectorAll('.article-card');
+            const loadMoreBtn = document.querySelector('.load-more-btn');
+            const readMoreButtons = document.querySelectorAll('.read-more');
+
+    
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+          
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                    this.classList.add('active');
+
+                    const category = this.textContent.toLowerCase();
+                    
+                    articles.forEach(article => {
+                        if (category === 'todos') {
+                            article.style.display = 'block';
+                            article.style.animation = 'slideInUp 0.6s ease-out';
+                        } else {
+                            const articleCategory = article.getAttribute('data-category');
+                            if (articleCategory === category || 
+                                (category === 'películas' && articleCategory === 'peliculas') ||
+                                (category === 'análisis' && articleCategory === 'analisis')) {
+                                article.style.display = 'block';
+                                article.style.animation = 'slideInUp 0.6s ease-out';
+                            } else {
+                                article.style.display = 'none';
+                            }
+                        }
+                    });
+
+                    // Efecto de reorganización de la grilla
+                    setTimeout(() => {
+                        const visibleArticles = document.querySelectorAll('.article-card[style*="block"]');
+                        visibleArticles.forEach((article, index) => {
+                            article.style.animationDelay = `${index * 0.1}s`;
+                        });
+                    }, 100);
+                });
+            });
+
+       
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let hasResults = false;
+
+                articles.forEach(article => {
+                    const title = article.querySelector('.article-title').textContent.toLowerCase();
+                    const content = article.querySelector('.article-excerpt').textContent.toLowerCase();
+                    const subtitle = article.querySelector('.article-subtitle').textContent.toLowerCase();
+                    
+                    if (searchTerm === '' || 
+                        title.includes(searchTerm) || 
+                        content.includes(searchTerm) || 
+                        subtitle.includes(searchTerm)) {
+                        article.style.display = 'block';
+                        article.style.animation = 'slideInUp 0.5s ease-out';
+                        hasResults = true;
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+
+              
+                let noResultsMsg = document.querySelector('.no-results-message');
+                if (!hasResults && searchTerm !== '') {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.className = 'no-results-message';
+                        noResultsMsg.style.cssText = `
+                            text-align: center;
+                            color: var(--text-gray);
+                            font-size: 1.2rem;
+                            padding: 3rem;
+                            grid-column: 1 / -1;
+                        `;
+                        noResultsMsg.innerHTML = `
+                            <h3>No se encontraron artículos</h3>
+                            <p>Intenta con otros términos de búsqueda</p>
+                        `;
+                        document.querySelector('.articles-grid').appendChild(noResultsMsg);
+                    }
+                } else if (noResultsMsg) {
+                    noResultsMsg.remove();
+                }
+
+            
+                if (searchTerm !== '') {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn').classList.add('active');
+                }
+            }
+
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+         
+            searchInput.addEventListener('input', function() {
+                clearTimeout(this.searchTimeout);
+                this.searchTimeout = setTimeout(performSearch, 300);
+            });
+
+ 
+            articles.forEach(article => {
+                article.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-20px) scale(1.03)';
+                    this.style.boxShadow = '0 30px 60px rgba(139, 0, 0, 0.4)';
+                });
+
+                article.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.4)';
+                });
+            });
+
+
+            let articlesRead = 0;
+            readMoreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    articlesRead++;
+                    
+           
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 120px;
+                        right: 30px;
+                        background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+                        color: var(--text-white);
+                        padding: 1.2rem 2rem;
+                        border-radius: 15px;
+                        z-index: 1001;
+                        transform: translateX(100%);
+                        transition: transform 0.4s ease;
+                        box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+                        border: 1px solid var(--secondary-red);
+                        font-weight: 600;
+                    `;
+                    notification.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span>📖</span>
+                            <span>¡Artículo ${articlesRead} añadido a tu lista de lectura!</span>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 400);
+                    }, 3500);
+
+                 
+                    this.style.background = 'linear-gradient(45deg, var(--secondary-red), var(--accent-red))';
+                    this.textContent = '¡Agregado! →';
+                    
+                    setTimeout(() => {
+                        this.style.background = 'linear-gradient(45deg, var(--primary-red), var(--secondary-red))';
+                        this.textContent = 'Leer más →';
+                    }, 2000);
+                });
+            });
+
+   
+            loadMoreBtn.addEventListener('click', function() {
+                this.textContent = 'Cargando...';
+                this.style.opacity = '0.7';
+                this.disabled = true;
+                
+
+                setTimeout(() => {
+         
+                    const newArticles = [
+                        {
+                            title: "Marvel Phase 5: El Futuro del MCU",
+                            subtitle: "Nuevos héroes, nuevas historias",
+                            excerpt: "Kevin Feige revela los próximos proyectos de Marvel Studios que definirán la siguiente década del Universo Cinematográfico de Marvel...",
+                            image: "https://images.unsplash.com/photo-1611604548018-d56bbd85d681?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            category: "peliculas",
+                            date: "15 de Julio, 2025"
+                        },
+                        {
+                            title: "Wednesday: Temporada 2 Confirmada",
+                            subtitle: "Jenna Ortega regresa a Nevermore",
+                            excerpt: "Netflix confirma oficialmente la segunda temporada de Wednesday con nuevos misterios en la Academia Nevermore y más bailes icónicos...",
+                            image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            category: "series",
+                            date: "12 de Julio, 2025"
+                        },
+                        {
+                            title: "Scorsese vs Marvel: El Debate Continúa",
+                            subtitle: "¿Arte o entretenimiento?",
+                            excerpt: "Un análisis profundo sobre el debate entre el cine de autor y las superproducciones, explorando ambas perspectivas en la industria actual...",
+                            image: "https://images.unsplash.com/photo-1489599387838-1726b119c37a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                            category: "analisis",
+                            date: "10 de Julio, 2025"
+                        }
+                    ];
+
+                    const articlesGrid = document.querySelector('.articles-grid');
+                    
+                    newArticles.forEach((articleData, index) => {
+                        const articleElement = document.createElement('article');
+                        articleElement.className = 'article-card';
+                        articleElement.setAttribute('data-category', articleData.category);
+                        articleElement.style.opacity = '0';
+                        articleElement.style.transform = 'translateY(50px)';
+                        
+                        articleElement.innerHTML = `
+                            <div class="article-image" style="background-image: url('${articleData.image}');"></div>
+                            <div class="article-content">
+                                <h3 class="article-title">${articleData.title}</h3>
+                                <p class="article-subtitle">${articleData.subtitle}</p>
+                                <p class="article-excerpt">${articleData.excerpt}</p>
+                                <div class="article-meta">
+                                    <span>📅 ${articleData.date}</span>
+                                    <a href="#" class="read-more">Leer más →</a>
+                                </div>
+                            </div>
+                        `;
+                        
+                        articlesGrid.appendChild(articleElement);
+                        
+          
+                        setTimeout(() => {
+                            articleElement.style.transition = 'all 0.6s ease-out';
+                            articleElement.style.opacity = '1';
+                            articleElement.style.transform = 'translateY(0)';
+                        }, index * 200);
+
+       
+                        const newReadMoreBtn = articleElement.querySelector('.read-more');
+                        newReadMoreBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            articlesRead++;
+                            
+                            const notification = document.createElement('div');
+                            notification.style.cssText = `
+                                position: fixed;
+                                top: 120px;
+                                right: 30px;
+                                background: linear-gradient(45deg, var(--primary-red), var(--secondary-red));
+                                color: var(--text-white);
+                                padding: 1.2rem 2rem;
+                                border-radius: 15px;
+                                z-index: 1001;
+                                transform: translateX(100%);
+                                transition: transform 0.4s ease;
+                                box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+                                border: 1px solid var(--secondary-red);
+                                font-weight: 600;
+                            `;
+                            notification.innerHTML = `
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span>📖</span>
+                                    <span>¡Artículo ${articlesRead} añadido a tu lista de lectura!</span>
+                                </div>
+                            `;
+                            
+                            document.body.appendChild(notification);
+                            
+                            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+                            setTimeout(() => {
+                                notification.style.transform = 'translateX(100%)';
+                                setTimeout(() => {
+                                    if (document.body.contains(notification)) {
+                                        document.body.removeChild(notification);
+                                    }
+                                }, 400);
+                            }, 3500);
+                        });
+
+                   
+                        articleElement.addEventListener('mouseenter', function() {
+                            this.style.transform = 'translateY(-20px) scale(1.03)';
+                            this.style.boxShadow = '0 30px 60px rgba(139, 0, 0, 0.4)';
+                        });
+
+                        articleElement.addEventListener('mouseleave', function() {
+                            this.style.transform = 'translateY(0) scale(1)';
+                            this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.4)';
+                        });
+                    });
+
+ 
+                    setTimeout(() => {
+                        this.textContent = '¡Artículos cargados con éxito!';
+                        this.style.background = 'linear-gradient(45deg, var(--primary-red), var(--secondary-red))';
+                        this.style.color = 'var(--text-white)';
+                        
+                        setTimeout(() => {
+                            this.textContent = 'Cargar Más Artículos';
+                            this.style.background = 'var(--card-bg)';
+                            this.style.color = 'var(--text-white)';
+                            this.style.opacity = '1';
+                            this.disabled = false;
+                        }, 2500);
+                    }, 1800);
+                    
+                }, 1500);
+            });
+
+
+            function createRipple(event) {
+                const button = event.currentTarget;
+                const rect = button.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                button.style.position = 'relative';
+                button.style.overflow = 'hidden';
+                button.appendChild(ripple);
+                
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 600);
+            }
+
+
+            document.querySelectorAll('.cta-button, .filter-btn, .read-more, .search-button, .load-more-btn').forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+  
+            const animateElements = document.querySelectorAll('.section-title, .featured-section');
+            animateElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.8s ease-out';
+                observer.observe(element);
+            });
+
+
+            function updateStats() {
+                const statsContainer = document.createElement('div');
+                statsContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 30px;
+                    background: var(--card-bg);
+                    color: var(--text-white);
+                    padding: 1rem 1.5rem;
+                    border-radius: 15px;
+                    border: 1px solid var(--primary-red);
+                    font-size: 0.9rem;
+                    z-index: 1000;
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                `;
+                
+                const visitorsCount = Math.floor(Math.random() * 1000) + 500;
+                const articlesCount = document.querySelectorAll('.article-card').length;
+                
+                statsContainer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <div>👥 ${visitorsCount} visitantes online</div>
+                        <div>📄 ${articlesCount} artículos disponibles</div>
+                        <div>📚 ${articlesRead} artículos leídos por ti</div>
+                    </div>
+                `;
+                
+                document.body.appendChild(statsContainer);
+
+                setTimeout(() => {
+                    if (document.body.contains(statsContainer)) {
+                        document.body.removeChild(statsContainer);
+                        setTimeout(updateStats, 1000);
+                    }
+                }, 30000);
+            }
+
+   
+            setTimeout(updateStats, 3000);
+
+
+            const additionalStyles = document.createElement('style');
+            additionalStyles.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+
+                .article-card {
+                    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+                }
+
+                .search-input:focus {
+                    animation: inputGlow 2s ease-in-out infinite alternate;
+                }
+
+                @keyframes inputGlow {
+                    from {
+                        box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+                    }
+                    to {
+                        box-shadow: 0 0 25px rgba(220, 20, 60, 0.5);
+                    }
+                }
+
+                .no-results-message {
+                    animation: fadeIn 0.5s ease-out;
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(additionalStyles);
+
+            console.log('🎬 Detrás del Frame - Portal de Cine cargado completamente');
+            console.log(`📊 ${articles.length} artículos disponibles para explorar`);
+        });
+    </script>
+</body>
+</html>
